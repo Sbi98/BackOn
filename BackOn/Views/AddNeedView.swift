@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct AddNeedView: View {
+    @EnvironmentObject var shared : Shared
+    @ObservedObject var datePickerData = DatePickerData()
     @ObservedObject var titlePickerData = TitlePickerData()
     @State var toggleRepeat = false
     @State var toggleVerified = false
@@ -48,6 +50,11 @@ struct AddNeedView: View {
             Toggle(isOn: $toggleVerified) {
                 Text("Do you want only verified helpers?")
             }
+            Text(datePickerData.selectedDate == Date() ? "Click to select the date of your need" :
+                "Date is \(datePickerData.selectedDate, formatter: self.shared.dateFormatter)")
+                .onTapGesture {
+                    withAnimation {self.datePickerData.showDatePicker.toggle()}
+            }
             Spacer()
             ConfirmAddNeedButton()
         }
@@ -55,7 +62,8 @@ struct AddNeedView: View {
         .padding(.vertical, 10)
         .frame(width: UIScreen.main.bounds.width, alignment: .leading)
         .overlay(myOverlay(isPresented: self.$titlePickerData.showTitlePicker, toOverlay: AnyView(TitlePicker(pickerElements: self.titlePickerData.titles, selectedValue: self.$titlePickerData.titlePickerValue))))
- 
+        .overlay(myOverlay(isPresented: self.$datePickerData.showDatePicker, toOverlay: AnyView(DataPicker(dataSelezionata: self.$datePickerData.selectedDate))))
+
     }
 }
 
@@ -81,3 +89,23 @@ struct TitlePicker: View {
     }
 }
 
+class DatePickerData: ObservableObject {
+    @Published var showDatePicker = false
+    @Published var selectedDate = Date()
+}
+
+struct DataPicker: View {
+    @Binding var dataSelezionata: Date
+    
+    var body: some View {
+        VStack {
+            DatePicker(selection: self.$dataSelezionata, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {
+                Text("Select a date")
+            }.labelsHidden()
+                .frame(width: UIScreen.main.bounds.width, height: 250)
+                .background(Color.primary.colorInvert())
+            //            Text("Date is \(dataSelezionata, formatter: dateFormatter)")
+        }.frame(width: UIScreen.main.bounds.width, height: 250)
+            .background(Color.primary.colorInvert())
+    }
+}
