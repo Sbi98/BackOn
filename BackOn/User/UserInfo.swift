@@ -18,6 +18,7 @@ class UserInfo {
     }
     var email: String?
     var profilePic: Image?
+    var isHelper: Int?
     
     init(photo: URL, name: String, surname: String) {
         self.photo = photo
@@ -33,11 +34,12 @@ class UserInfo {
         self.email = email
     }
 
-    init(photo: String, name: String, surname: String, email: String, url: URL) {
+    init(name: String, surname: String, email: String, url: URL, isHelper: Int) {
         self.photo = url
         self.name = name
         self.surname = surname
         self.email = email
+        self.isHelper = isHelper
         do {
             profilePic = try Image(uiImage: UIImage(data: Data(contentsOf: url))!)
         } catch {}

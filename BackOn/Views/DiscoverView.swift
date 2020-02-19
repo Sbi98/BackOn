@@ -108,7 +108,7 @@ struct DiscoverRow: View {
                     if let array = json as? NSArray {
                         for obj in array {
                             if let dict = obj as? NSDictionary {
-                                
+
                                 let id = dict.value(forKey: "id")
                                 let descrizione = dict.value(forKey: "description")
                                 let data = dict.value(forKey: "date")
@@ -119,6 +119,7 @@ struct DiscoverRow: View {
                                 let userSurname = dict.value(forKey: "userSurname")
                                 let userName = dict.value(forKey: "userName")
                                 let title = dict.value(forKey: "titolo")
+                                let userStatus = dict.value(forKey: "userStatus")
                                 
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
@@ -127,14 +128,15 @@ struct DiscoverRow: View {
                                 
                                 let position: CLLocation = CLLocation(latitude: (latitude as! NSString).doubleValue, longitude: (longitude as! NSString).doubleValue)
                                 
-                                
-                                let user = UserInfo(photo: URL(string: "\(userPhoto!)")!, name: userName! as! String, surname: userSurname! as! String, email: userEmail! as! String)
-                                
-                                
+
+                                let user = UserInfo(name: userName! as! String, surname: userSurname! as! String, email: userEmail! as! String, url: URL(string: userPhoto! as! String)!, isHelper: userStatus! as! Int)
+
+
                                 let c = Commitment(userInfo: user, title: title! as! String, descr: descrizione! as! String, date: date , position: position, ID: id! as! Int)
-                                
+
+                                //AGGIUNGERE CONTROLLO CHE PRENDE DA CORE DATA L'UTENTE LOGGATO E CONFRONTA LA SUA EMAIL CON userEmail.
+                                //Se è uguale non deve fare questo comando qui sotto!
                                 self.shared.discoverSet[id! as! Int] = c
-                                
                             }
                         }
                     }
@@ -142,8 +144,6 @@ struct DiscoverRow: View {
             }
         }.resume()
     }
-    
-    
     
 }
 
@@ -153,43 +153,43 @@ struct FullDiscoverView: View {
     @State private var selectedView = 0
     var body: some View {
         VStack (alignment: .leading, spacing: 10){
-             Button(action: {
-                          withAnimation{
-                              HomeView.show()
-                          }}){
-                      HStack {
-                          Image(systemName: "chevron.left")
-                          .font(.largeTitle)
-                          
-                          Text("Around you")
-                              .fontWeight(.bold)
-                              .font(.title).foregroundColor(.primary)
-                      }.padding([.top,.horizontal])
-                      }
+            Button(action: {
+                withAnimation{
+                    HomeView.show()
+                }}){
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.largeTitle)
+                        
+                        Text("Around you")
+                            .fontWeight(.bold)
+                            .font(.title).foregroundColor(.primary)
+                    }.padding([.top,.horizontal])
+            }
             
             Picker(selection: $selectedView, label: Text("What is your favorite color?")) {
                 Text("List").tag(0)
                 Text("Map").tag(1)
-                }.pickerStyle(SegmentedPickerStyle()).labelsHidden().padding(.horizontal)
+            }.pickerStyle(SegmentedPickerStyle()).labelsHidden().padding(.horizontal)
             if selectedView == 0 {ScrollView(.vertical, showsIndicators: false) {
-                    VStack (alignment: .center, spacing: 25){
-                        ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
-                            Button(action: {
-                                self.shared.selectedCommitment = currentDiscover
-                                DiscoverDetailedView.show()
-                            }) {
-                                HStack {
-                                    UserPreview(user: currentDiscover.userInfo, description: "\(currentDiscover.title)\nCasa", whiteText: self.shared.darkMode)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .font(.headline)
-                                        .foregroundColor(Color(UIColor.systemBlue))
-                                }.padding(.horizontal, 15)
-                            }.buttonStyle(PlainButtonStyle())
-                        }
-                    }.padding(.top,20)
+                VStack (alignment: .center, spacing: 25){
+                    ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
+                        Button(action: {
+                            self.shared.selectedCommitment = currentDiscover
+                            DiscoverDetailedView.show()
+                        }) {
+                            HStack {
+                                UserPreview(user: currentDiscover.userInfo, description: "\(currentDiscover.title)\nCasa", whiteText: self.shared.darkMode)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.headline)
+                                    .foregroundColor(Color(UIColor.systemBlue))
+                            }.padding(.horizontal, 15)
+                        }.buttonStyle(PlainButtonStyle())
+                    }
+                }.padding(.top,20)
                 }
-        }
+            }
             else{
                 MapViewDiscover().cornerRadius(20)
             }
@@ -200,55 +200,5 @@ struct FullDiscoverView: View {
     }
 }
 
-//struct FullDiscoverView: View {
-//    @EnvironmentObject var shared: Shared
-//    @State private var selectedView = 0
-//    var body: some View {
-//        VStack (alignment: .leading, spacing: 10) {
-//            Button(action: {withAnimation{HomeView.show()}})
-//            {
-//                HStack {
-//                    Image(systemName: "chevron.left")
-//                        .font(.largeTitle)
-//
-//                    Text("Around you")
-//                        .fontWeight(.bold)
-//                        .font(.title).foregroundColor(.primary)
-//                }.padding([.top,.horizontal])
-//            }
-//
-//            Picker(selection: $selectedView, label: Text("What is your favorite color?")) {
-//                Text("List").tag(0)
-//                Text("Map").tag(1)
-//            }.pickerStyle(SegmentedPickerStyle()).labelsHidden().padding(.horizontal)
-//            if selectedView == 0 {
-//                ScrollView(.vertical, showsIndicators: false) {
-//                    VStack (alignment: .center, spacing: 25){
-//                        ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
-//                            Button(action: {
-//                                self.shared.selectedCommitment = currentDiscover
-//                                DiscoverDetailedView.show()
-//                            }) {
-//                                HStack {
-//                                    UserPreview(user: currentDiscover.userInfo, description: "\(currentDiscover.title)\nCasa", whiteText: self.shared.darkMode)
-//                                    Spacer()
-//                                    Image(systemName: "chevron.right")
-//                                        .font(.headline)
-//                                        .foregroundColor(Color(UIColor.systemBlue))
-//                                }.padding(.horizontal, 15)
-//                            }.buttonStyle(PlainButtonStyle())
-//                        }
-//                    }.padding(.top,20)
-//                }
-//            }
-//            else {
-//                MapViewDiscover().cornerRadius(20)
-//            }
-//        }
-//        .padding(.top, 40)
-//        .background(Color("background"))
-//        .edgesIgnoringSafeArea(.all)
-//    }
-//}
 
 

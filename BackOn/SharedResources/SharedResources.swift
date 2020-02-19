@@ -28,7 +28,7 @@ class Shared: ObservableObject {
         }
     }
     @Published var neederInfo: UserInfo?
-    @Published var image: URL? = URL(string: "")
+//    @Published var image: URL? = URL(string: "")
     
     var darkMode: Bool{
         get{

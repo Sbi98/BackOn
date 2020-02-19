@@ -33,14 +33,14 @@ struct DiscoverDetailedView: View {
                         destination.name = "\(self.selectedCommitment.userInfo.name)'s request: \(self.selectedCommitment.title)"
                         request.destination = destination
                         request.destination?.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking])
-                        }, label: {
-                            Text("Open in Maps").fontWeight(.light)})
+                    }, label: {
+                        Text("Open in Maps").fontWeight(.light)})
                 }.padding(.horizontal)
             }
             VStack (alignment: .leading, spacing: 10){
-               // UserPreview(user: selectedCommitment.userInfo, description: selectedCommitment.etaText, whiteText: shared.darkMode)
-UserPreview(user: selectedCommitment.userInfo, description: shared.locationManager.lastLocation != nil ? selectedCommitment.etaText : "Location services disabled", whiteText: shared.darkMode)                          
-    .offset(x: 0, y: -10)
+                // UserPreview(user: selectedCommitment.userInfo, description: selectedCommitment.etaText, whiteText: shared.darkMode)
+                UserPreview(user: selectedCommitment.userInfo, description: shared.locationManager.lastLocation != nil ? selectedCommitment.etaText : "Location services disabled", whiteText: shared.darkMode)                          
+                    .offset(x: 0, y: -10)
                 Text(selectedCommitment.title)
                     .font(.headline)
                     .fontWeight(.regular)
@@ -48,7 +48,7 @@ UserPreview(user: selectedCommitment.userInfo, description: shared.locationManag
                     .font(.subheadline)
                     .fontWeight(.light)
                     .bold()
-//                    .frame(width: .none, height: 60, alignment: .leading)
+                //                    .frame(width: .none, height: 60, alignment: .leading)
                 Spacer()
                 DoItButton()
             }.padding(.horizontal)

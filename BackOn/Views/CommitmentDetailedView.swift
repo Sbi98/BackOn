@@ -61,9 +61,3 @@ struct CommitmentDetailedView: View {
     }
 }
 
-
-//struct CommitmentDetailedView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CommitmentDetailedView()
-//    }
-//}

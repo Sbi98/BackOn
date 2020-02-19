@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         let myUser: UserInfo = UserInfo(photo: image!, name: givenName!, surname: familyName!, email: email!)
         
-        shared.image = image!
+//        shared.image = image!
         
 //        LO AGGIUNGO ANCHE A CORE DATA PER DELLE RICHIESTE SENZA INTERNET
         CoreDataController.shared.addUser(user: myUser)

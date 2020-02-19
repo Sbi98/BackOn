@@ -25,8 +25,8 @@ struct CommitmentView: View {
                 }
             }) {
                 VStack{
-Avatar(image: commitment.userInfo.profilePic)
-//                    Avatar(image: "\(commitment.userInfo.photo)", size: 60)
+                    Avatar(image: commitment.userInfo.profilePic)
+                    //                    Avatar(image: "\(commitment.userInfo.photo)", size: 60)
                     Spacer()
                     Text(self.commitment.userInfo.identity)
                         .font(.title)
@@ -35,7 +35,7 @@ Avatar(image: commitment.userInfo.profilePic)
                     Text(self.commitment.title).foregroundColor(Color.primary)
                     Spacer()
                     Text(self.shared.dateFormatter.string(from: self.commitment.date)).foregroundColor(Color.secondary).padding(.horizontal, 10).offset(y:15).frame(width: 320, alignment: .trailing)
-                 }.offset(x: 0, y: -30)
+                }.offset(x: 0, y: -30)
             }.buttonStyle(PlainButtonStyle())
         }
         .frame(width: CGFloat(320), height: CGFloat(400))
@@ -82,6 +82,7 @@ struct CommitmentRow: View {
     
     //MARK: GetCommitByUser
     func getCommitByUser() {
+        print("*** getCommitByUser ***")
         let coreDataController: CoreDataController = CoreDataController()
         let userEmail: String = coreDataController.getLoggedUser().1.email!
         let parameters: [String: String] = ["email": userEmail]
@@ -118,13 +119,31 @@ struct CommitmentRow: View {
                     if let array = json as? NSArray {
                         for obj in array {
                             if let dict = obj as? NSDictionary {
-                                // Now reference the data you need using:
+                                
                                 let id = dict.value(forKey: "id")
-                                let descrizione = dict.value(forKey: "descrizione")
-                                print(id!)
-                                print(descrizione!)
-                                let tmp: Result = Result(id: "\(id!)", descrizione: "\(descrizione!)")
-                                self.results.append(tmp)
+                                let descrizione = dict.value(forKey: "description")
+                                let data = dict.value(forKey: "date")
+                                let latitude = dict.value(forKey: "latitude")
+                                let longitude = dict.value(forKey: "longitude")
+                                let userEmail = dict.value(forKey: "userEmail")
+                                let userPhoto = dict.value(forKey: "userPhoto")
+                                let userSurname = dict.value(forKey: "userSurname")
+                                let userName = dict.value(forKey: "userName")
+                                let userStatus = dict.value(forKey: "userStatus")
+                                let title = dict.value(forKey: "titolo")
+                                
+                                let dateFormatter = DateFormatter()
+                                dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+                                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+                                let date = dateFormatter.date(from:"\(data!)")!
+                                
+                                let position: CLLocation = CLLocation(latitude: (latitude as! NSString).doubleValue, longitude: (longitude as! NSString).doubleValue)
+                                
+                                let user = UserInfo(name: userName! as! String, surname: userSurname! as! String, email: userEmail! as! String, url: URL(string: userPhoto! as! String)!, isHelper: userStatus! as! Int)
+                                
+                                let c = Commitment(userInfo: user, title: title! as! String, descr: descrizione! as! String, date: date , position: position, ID: id! as! Int)
+                                
+                                self.shared.commitmentSet[id! as! Int] = c
                             }
                         }
                     }
@@ -159,14 +178,14 @@ struct CommitmentsListView: View {
                         Button(action: {withAnimation{
                             self.shared.selectedCommitment = currentCommitment
                             CommitmentDetailedView.show()
-                        }}) {
-                            HStack {
-                                UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .font(.headline)
-                                    .foregroundColor(Color(UIColor.systemBlue))
-                            }.padding(.horizontal, 15)
+                            }}) {
+                                HStack {
+                                    UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.headline)
+                                        .foregroundColor(Color(UIColor.systemBlue))
+                                }.padding(.horizontal, 15)
                         }.buttonStyle(PlainButtonStyle())
                     }
                 }.padding(.top,20)
