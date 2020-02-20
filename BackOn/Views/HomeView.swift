@@ -18,13 +18,11 @@ struct HomeView: View {
     var body: some View {
         RefreshableScrollView(height: 70, refreshing: self.$shared.loading) {
             VStack{
-                VStack(alignment: .leading){
-                Text("Hi \(CoreDataController().getLoggedUser().1.name)!")
-                    .font(.largeTitle)
-                    .bold()
-                    .fontWeight(.heavy)
-                    .padding(.top)
-                                    }
+                    Text("Hi \(CoreDataController().getLoggedUser().1.name)!")
+                        .font(.largeTitle)
+                        .bold()
+                        .fontWeight(.heavy).padding(.horizontal)
+                        .padding(.top).frame(width: UIScreen.main.bounds.width, alignment: .leading)
 //                          Bottone per notificare il prossimo commitment
                 
 //                Button(action: {

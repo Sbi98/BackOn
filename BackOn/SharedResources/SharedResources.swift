@@ -15,10 +15,13 @@ class Shared: ObservableObject {
         didSet {
             if oldValue == false && loading == true {
                 if helperMode{
+                    commitmentSet.removeAll(keepingCapacity: false)
+                    discoverSet.removeAll(keepingCapacity: false)
                     (UIApplication.shared.delegate as! AppDelegate).dbController.loadMyCommitments()
                     (UIApplication.shared.delegate as! AppDelegate).dbController.loadCommitByOther()
                 }
                 else{
+                    needSet.removeAll(keepingCapacity: false)
                     (UIApplication.shared.delegate as! AppDelegate).dbController.getCommitByUser()
                 }
                 self.loading = false
@@ -34,7 +37,7 @@ class Shared: ObservableObject {
     @Published var commitmentSet: [Int:Commitment] = [:]
     @Published var discoverSet: [Int:Commitment] = [:]
     @Published var needSet: [Int:Commitment] = [:]
-    @Published var helperMode = false
+    @Published var helperMode = true
     @Published var addressText = "Click to insert the address"
     func textAddress(){
             CLGeocoder().reverseGeocodeLocation(locationManager.lastLocation!, completionHandler: {(placemarks, error) in
