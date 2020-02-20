@@ -93,11 +93,6 @@ class DatabaseController {
                                 let data = dict.value(forKey: "date")
                                 let latitude = dict.value(forKey: "latitude")
                                 let longitude = dict.value(forKey: "longitude")
-                                let userEmail = dict.value(forKey: "userEmail")
-                                let userPhoto = dict.value(forKey: "userPhoto")
-                                let userSurname = dict.value(forKey: "userSurname")
-                                let userName = dict.value(forKey: "userName")
-                                let userStatus = dict.value(forKey: "userStatus")
                                 let title = dict.value(forKey: "titolo")
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
@@ -108,6 +103,11 @@ class DatabaseController {
                                 var c: Commitment
                                 
                                 if (isAccepted! as! Int) == 1 {
+                                    let userEmail = dict.value(forKey: "userEmail")
+                                    let userPhoto = dict.value(forKey: "userPhoto")
+                                    let userSurname = dict.value(forKey: "userSurname")
+                                    let userName = dict.value(forKey: "userName")
+                                    let userStatus = dict.value(forKey: "userStatus")
                                     let user = UserInfo(name: userName! as! String, surname: userSurname! as! String, email: userEmail! as! String, photoURL: URL(string: userPhoto! as! String)!, isHelper: userStatus! as! Int)
                                     c = Commitment(userInfo: user, title: title! as! String, descr: descrizione! as! String, date: date , position: position, ID: id! as! Int)
                                 } else {

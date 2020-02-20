@@ -23,12 +23,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let shared = appDelegate.shared
+        let dbController = appDelegate.dbController
         
 //        QUI CONTROLLO SE L'UTENTE HA EFFETTUATO L'ACCESSO
-        if !CoreDataController.shared.userIsLogged() {
-            LoginPageView.show()
-        } else {
+        if CoreDataController.shared.userIsLogged() {
+            if shared.helperMode {
+                dbController.loadMyCommitments()
+                dbController.loadCommitByOther()
+            } else {
+                dbController.getCommitByUser()
+            }
+            print("Mando la dispatch!\n")
             LoadingPageView.show()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+               if shared.helperMode {
+                   HomeView.show()
+               } else {
+                   NeederHomeView.show()
+               }
+           }
+        } else {
+            LoginPageView.show()
         }
         
 //              HO SCELTO AUTORIZZAZIONE AD ALERT, BADGE E NOTIFICATION SOUND

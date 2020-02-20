@@ -39,22 +39,23 @@ struct LoadingPageView: View {
             Spacer()
             
             
-            }.onAppear(perform: {
-                if self.shared.helperMode {
-                    self.dbController.loadMyCommitments()
-                    self.dbController.loadCommitByOther()
-                } else {
-                    self.dbController.getCommitByUser()
-                }
-                print("Mando la dispatch!\n")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    if self.shared.helperMode {
-                        HomeView.show()
-                    } else {
-                        NeederHomeView.show()
-                    }
-                }
-            })
+            }
+//            .onAppear(perform: { //FONTE DI ERROREEEEEEE
+//                if self.shared.helperMode {
+//                    self.dbController.loadMyCommitments()
+//                    self.dbController.loadCommitByOther()
+//                } else {
+//                    self.dbController.getCommitByUser()
+//                }
+//                print("Mando la dispatch!\n")
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                    if self.shared.helperMode {
+//                        HomeView.show()
+//                    } else {
+//                        NeederHomeView.show()
+//                    }
+//                }
+//            })
             .background(LinearGradient(gradient: Gradient(colors: [.red, .orange]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.all))
     }
