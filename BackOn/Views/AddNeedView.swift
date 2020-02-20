@@ -85,7 +85,7 @@ struct AddNeedView: View {
                 .edgesIgnoringSafeArea(.all)
                 
             Spacer()
-            ConfirmAddNeedButton()
+            ConfirmAddNeedButton(title: "titolo", description: "descrizione", date: Date(), latitude: 41, longitude: 15)
             
         } //Chiusura VStack
 //            .edgesIgnoringSafeArea(.all)

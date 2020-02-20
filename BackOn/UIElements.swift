@@ -211,6 +211,11 @@ struct AddNeedButton: View {
 struct ConfirmAddNeedButton: View {
     @EnvironmentObject var shared: Shared
     let dbController = (UIApplication.shared.delegate as! AppDelegate).dbController
+    let title: String
+    let description: String
+    let date: Date
+    let latitude: Double
+    let longitude: Double
     
     var body: some View {
         HStack{
@@ -219,7 +224,7 @@ struct ConfirmAddNeedButton: View {
                 print("Add need!")
                 //                IMPORTANTE SALVA NEED E INVIALO AL SERVER
                 NeederHomeView.show()
-                self.dbController.insertCommit(title: "Titolo1", description: "Descrizione", date: Date(), latitude: 41, longitude: 15)
+                self.dbController.insertCommit(title: self.title, description: self.description, date: self.date, latitude: self.latitude, longitude: self.longitude)
                 self.dbController.getCommitByUser()
             }) {
                 HStack{

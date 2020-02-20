@@ -51,6 +51,7 @@ class DatabaseController {
     }
     
     //MARK: GetCommitByUser
+    // Usata dal needer per vedere le sue richieste di aiuto
     func getCommitByUser() {
         print("*** getCommitByUser ***")
         let coreDataController: CoreDataController = CoreDataController()

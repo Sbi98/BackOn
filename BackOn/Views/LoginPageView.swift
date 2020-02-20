@@ -41,6 +41,14 @@ struct LoginPageView: View {
                     .bold()
                     .foregroundColor(.black)
             }
+            Spacer()
+            VStack{
+                Text("How would you use the app?\nAs an helper or a needer?").font(.headline).colorInvert()
+                Picker(selection: self.$shared.helperMode, label: Text("Helper or needer")) {
+                    Text("Helper").tag(true)
+                    Text("Needer").tag(false)
+                }.pickerStyle(SegmentedPickerStyle()).labelsHidden().padding(.horizontal)
+            }
 //          MyAppleIDButton().frame(width: 200, height: 30, alignment: .center)
 //              .padding(.bottom, 20)
             Spacer()
@@ -50,11 +58,6 @@ struct LoginPageView: View {
     }
 }
 
-struct LoginPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginPageView()
-    }
-}
 
 struct GoogleButton: UIViewRepresentable {
     
@@ -67,7 +70,6 @@ struct GoogleButton: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: GIDSignInButton, context: UIViewRepresentableContext<GoogleButton>) {
-        
     }
 }
 
