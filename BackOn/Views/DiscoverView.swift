@@ -22,9 +22,7 @@ struct DiscoverView: View {
             }
         }) {
             VStack (alignment: .leading, spacing: 5){
-                //UserPreview(user: commitment.userInfo, description: "\(commitment.etaText)", whiteText: shared.darkMode)
                 UserPreview(user: commitment.userInfo, description: shared.locationManager.lastLocation != nil ? commitment.etaText : "Location services disabled", whiteText: shared.darkMode)
-                
                 Text(commitment.title)
                     .font(.headline)
                     .fontWeight(.regular)
@@ -38,10 +36,10 @@ struct DiscoverView: View {
                     .frame(width: .none, height: 60, alignment: .leading)
             }.padding(.horizontal, 20)
                 .offset(x: 0, y: -10)
-                .frame(width: CGFloat(320), height: CGFloat(230))
+                .frame(width: 320, height: 230)
         }
         .buttonStyle(PlainButtonStyle())
-        .frame(width: CGFloat(320), height: CGFloat(230))
+        .frame(width: 320, height: 230)
         .background(Color.primary.colorInvert())
         .cornerRadius(10)
         .shadow(radius: 10)
@@ -65,9 +63,7 @@ struct DiscoverRow: View {
                 }
             }) {
                 HStack {
-                    Text(self.shared.helperMode ? "Around you" : "Your requests")
-                        
-                        //Text("Around you")
+                    Text("Around you")
                         .fontWeight(.bold)
                         .font(.title)
                     Spacer()
@@ -85,9 +81,8 @@ struct DiscoverRow: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
                         ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
-                            DiscoverView(commitment: currentDiscover).frame(width: CGFloat(320), height: CGFloat(230))
+                            DiscoverView(commitment: currentDiscover).frame(width: 320, height: 230)
                         }
-                        
                     }.padding(20)
                 }.offset(x: 0, y: -20)
             }
