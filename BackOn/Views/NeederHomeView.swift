@@ -11,11 +11,11 @@ import CoreLocation
 import GoogleSignIn
 
 struct NeederHomeView: View {
-    let shared = (UIApplication.shared.delegate as! AppDelegate).shared
+    @ObservedObject var  shared = (UIApplication.shared.delegate as! AppDelegate).shared
     let dbController = (UIApplication.shared.delegate as! AppDelegate).dbController
 
     var body: some View {
-        ScrollView{
+        RefreshableScrollView(height: 100, refreshing: self.$shared.loading){
             VStack(alignment: .leading){
                 Text("Hi \(CoreDataController().getLoggedUser().1.name)!")
                     .font(.largeTitle)

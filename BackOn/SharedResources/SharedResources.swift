@@ -11,6 +11,21 @@ import CoreLocation
 import MapKit
 
 class Shared: ObservableObject {
+    @Published var loading: Bool = false {
+        didSet {
+            if oldValue == false && loading == true {
+                if helperMode{
+                    (UIApplication.shared.delegate as! AppDelegate).dbController.loadMyCommitments()
+                    (UIApplication.shared.delegate as! AppDelegate).dbController.loadCommitByOther()
+                }
+                else{
+                    (UIApplication.shared.delegate as! AppDelegate).dbController.getCommitByUser()
+                }
+                self.loading = false
+            }
+            
+        }
+    }
     @Published var previousView = "HomeView"
     @Published var authentication = false
     @Published var viewToShow = "HomeView"

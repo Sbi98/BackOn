@@ -95,9 +95,10 @@ struct CommitmentsListView: View {
                         .fontWeight(.bold)
                         .font(.title)
                         .padding(.leading, 5)
+                    Spacer()
                 }.padding([.top,.horizontal])
             }.buttonStyle(PlainButtonStyle())
-            ScrollView(.vertical, showsIndicators: false) {
+            RefreshableScrollView(height: 70, refreshing: self.$shared.loading) {
                 VStack (alignment: .center, spacing: 25){
                     ForEach(shared.commitmentArray(), id: \.ID) { currentCommitment in
                         Button(action: {withAnimation{

@@ -19,7 +19,7 @@ struct HomeView: View {
         //        LoadingView(isShowing: .constant(isLoading)) {
         //            NavigationView {
         
-        ScrollView(.vertical, showsIndicators: false) {
+        RefreshableScrollView(height: 70, refreshing: self.$shared.loading) {
             VStack{
                 //          Bottone per notificare il prossimo commitment
                 //                        Button("Schedule Notification") {
