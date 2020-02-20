@@ -96,7 +96,7 @@ struct DiscoverRow: View {
     
     func loadCommitByOther() {
         print("loadCommitByOther")
-        guard let url = URL(string: "http://10.24.48.197:8080/NewBackOn-0.0.1-SNAPSHOT/GetAllOtherCommit") else {
+        guard let url = URL(string: "http://95.245.183.186:8180/NewBackOn-0.0.1-SNAPSHOT/GetAllOtherCommit") else {
             print("Invalid URL")
             return
         }

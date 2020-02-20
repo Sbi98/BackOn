@@ -88,7 +88,7 @@ struct CommitmentRow: View {
         let parameters: [String: String] = ["email": userEmail]
         
         //create the url with URL
-        let url = URL(string: "http://10.24.48.197:8080/NewBackOn-0.0.1-SNAPSHOT/GetCommitByUserEmail")! //change the url
+        let url = URL(string: "http://95.245.183.186:8180/NewBackOn-0.0.1-SNAPSHOT/GetCommitByUserEmail")! //change the url
         
         //now create the URLRequest object using the url object
         var request = URLRequest(url: url)

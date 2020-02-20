@@ -194,7 +194,7 @@ struct AddNeedButton: View {
         let parameters: [String: String] = ["title":"\(title)", "description": "\(description)", "email": userEmail, "date":"\(formattedDate)","latitude":"\(latitude)", "longitude":"\(longitude)"]
         
         //create the url with URL
-        let url = URL(string: "http://\(shared.myIP):8080/NewBackOn-0.0.1-SNAPSHOT/InsertCommit")! //change the url
+        let url = URL(string: "http://\(shared.myIP):8180/NewBackOn-0.0.1-SNAPSHOT/InsertCommit")! //change the url
         
         //now create the URLRequest object using the url object
         var request = URLRequest(url: url)

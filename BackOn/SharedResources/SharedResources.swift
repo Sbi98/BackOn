@@ -18,7 +18,7 @@ class Shared: ObservableObject {
     @Published var selectedCommitment = Commitment()
     @Published var commitmentSet: [Int:Commitment] = commitmentDict
     @Published var discoverSet: [Int:Commitment] = [:]
-    @Published var myIP: String = "10.24.48.197"
+    @Published var myIP: String = "95.245.183.186"
     @Published var helperMode = true
     private static var formatter = DateFormatter()
     var dateFormatter: DateFormatter{
