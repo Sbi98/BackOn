@@ -36,7 +36,9 @@ struct DiscoverView: View {
                     .bold()
                     .foregroundColor(.black)
                     .frame(width: .none, height: 60, alignment: .leading)
-            }.padding(.horizontal, 20).offset(x: 0, y: -10)
+            }.padding(.horizontal, 20)
+                .offset(x: 0, y: -10)
+                .frame(width: CGFloat(320), height: CGFloat(230))
         }
         .buttonStyle(PlainButtonStyle())
         .frame(width: CGFloat(320), height: CGFloat(230))
@@ -75,13 +77,20 @@ struct DiscoverRow: View {
                 }.padding(.horizontal, 20)
             }.buttonStyle(PlainButtonStyle())
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 20) {
-                    ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
-                        DiscoverView(commitment: currentDiscover)
-                    }
-                }.padding(20)
-            }.offset(x: 0, y: -20)
+            if shared.discoverArray().isEmpty{
+                Text("There are no commitments in your surroundings").font(.headline)
+                    .padding(.horizontal, 50)
+            } else{
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
+                            DiscoverView(commitment: currentDiscover).frame(width: CGFloat(320), height: CGFloat(230))
+                        }
+                        
+                    }.padding(20)
+                }.offset(x: 0, y: -20)
+            }
         }.onAppear(perform: loadCommitByOther)
     }
     
