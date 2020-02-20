@@ -30,10 +30,7 @@ struct AddNeedView: View {
             .padding(.vertical, 10)
             
             Form{
-                
                 Section(header: Text("Need informations")){
-                    //                    Text("Type of your need")
-                    //                        .font(.headline)
                     HStack{
                         Text("Title: ")
                             .foregroundColor(Color(.systemBlue))
@@ -50,10 +47,8 @@ struct AddNeedView: View {
                             .background(Color.primary.colorInvert())
                             .cornerRadius(5)
                             .font(.callout)
-//
                     }
                 }
-                
                 
                 Section(header: Text("Time")){
                     HStack{
@@ -70,7 +65,6 @@ struct AddNeedView: View {
                 }
                     
                 Section(header: Text("Location")){
-                        
                         HStack{
                             Text("Place: ")
                                 .foregroundColor(Color(.systemBlue))

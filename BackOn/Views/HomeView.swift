@@ -18,15 +18,15 @@ struct HomeView: View {
     var body: some View {
         RefreshableScrollView(height: 70, refreshing: self.$shared.loading) {
             VStack{
-                VStack(alignment: .leading){
-                Text("Hi \(CoreDataController().getLoggedUser().1.name)!")
-                    .font(.largeTitle)
-                    .bold()
-                    .fontWeight(.heavy)
-                    .padding(.top)
-                                    }
-//                          Bottone per notificare il prossimo commitment
-                
+                HStack {
+                    Text("Hi \(CoreDataController().getLoggedUser().1.name)!")
+                        .font(.largeTitle)
+                        .bold()
+                        .fontWeight(.heavy)
+                        .padding(.top)
+                    Spacer()
+                }.padding(.horizontal)
+
 //                Button(action: {
 //                    print("Logout!")
 //                    GIDSignIn.sharedInstance()?.disconnect()
@@ -65,8 +65,6 @@ struct HomeView: View {
         .padding(.top, 40)
         .background(Color("background"))
         .edgesIgnoringSafeArea(.all)
-        //            }
-        //        }
     }
     
 }
