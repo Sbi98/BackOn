@@ -31,24 +31,24 @@ struct LoginPageView: View {
                 .shadow(radius: 10)
             
             Spacer()
-            GoogleButton()
-                .frame(width: 200, height: 30, alignment: .center)
-                .padding(.bottom, 20)
-            Button(action: {
-                HomeView.show()
-            }) {
-                Text("Home")
-                    .bold()
-                    .foregroundColor(.black)
-            }
-            Spacer()
-            VStack{
-                Text("How would you use the app?\nAs an helper or a needer?").font(.headline).colorInvert()
+            VStack {
+                Text("How would you use the app?").font(.headline).colorInvert()
                 Picker(selection: self.$shared.helperMode, label: Text("Helper or needer")) {
                     Text("Helper").tag(true)
                     Text("Needer").tag(false)
-                }.pickerStyle(SegmentedPickerStyle()).labelsHidden().padding(.horizontal)
+                }.pickerStyle(SegmentedPickerStyle()).labelsHidden()
+                .frame(width: 200, height: 30, alignment: .center)
             }
+            Spacer()
+            GoogleButton()
+                .frame(width: 200, height: 30, alignment: .center)
+//            Button(action: {
+//                HomeView.show()
+//            }) {
+//                Text("Home")
+//                    .bold()
+//                    .foregroundColor(.black)
+//            }
 //          MyAppleIDButton().frame(width: 200, height: 30, alignment: .center)
 //              .padding(.bottom, 20)
             Spacer()

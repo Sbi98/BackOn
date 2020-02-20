@@ -42,7 +42,7 @@ struct LoadingPageView: View {
             }
             .onAppear(perform: {
                 self.shared.loading = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     if self.shared.helperMode {
                         HomeView.show()
                     } else {
