@@ -14,6 +14,7 @@ class Shared: ObservableObject {
     @Published var loading: Bool = false {
         didSet {
             if oldValue == false && loading == true {
+                LoadingPageView.show()
                 if helperMode{
                     commitmentSet.removeAll(keepingCapacity: false)
                     discoverSet.removeAll(keepingCapacity: false)
