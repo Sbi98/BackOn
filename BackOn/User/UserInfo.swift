@@ -34,14 +34,14 @@ class UserInfo {
         self.email = email
     }
 
-    init(name: String, surname: String, email: String, url: URL, isHelper: Int) {
-        self.photo = url
+    init(name: String, surname: String, email: String, photoURL: URL, isHelper: Int) {
+        self.photo = photoURL
         self.name = name
         self.surname = surname
         self.email = email
         self.isHelper = isHelper
         do {
-            profilePic = try Image(uiImage: UIImage(data: Data(contentsOf: url))!)
+            profilePic = try Image(uiImage: UIImage(data: Data(contentsOf: photoURL))!)
         } catch {}
     }
 }

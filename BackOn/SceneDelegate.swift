@@ -27,6 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        QUI CONTROLLO SE L'UTENTE HA EFFETTUATO L'ACCESSO
         if !CoreDataController.shared.userIsLogged() {
             LoginPageView.show()
+        } else {
+            LoadingPageView.show()
         }
         
 //              HO SCELTO AUTORIZZAZIONE AD ALERT, BADGE E NOTIFICATION SOUND

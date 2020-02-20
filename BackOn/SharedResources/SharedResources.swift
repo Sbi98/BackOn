@@ -18,8 +18,8 @@ class Shared: ObservableObject {
     @Published var selectedCommitment = Commitment()
     @Published var commitmentSet: [Int:Commitment] = [:]
     @Published var discoverSet: [Int:Commitment] = [:]
-    @Published var myIP: String = "95.245.183.186"
-    @Published var helperMode = true
+    @Published var needSet: [Int:Commitment] = [:]
+    @Published var helperMode = false
     private static var formatter = DateFormatter()
     var dateFormatter: DateFormatter{
         get{
@@ -38,6 +38,10 @@ class Shared: ObservableObject {
     
     func commitmentArray() -> [Commitment] {
         return Array(commitmentSet.values)
+    }
+    
+    func needArray() -> [Commitment] {
+        return Array(needSet.values)
     }
     
     func discoverArray() -> [Commitment] {

@@ -30,34 +30,31 @@ struct CloseButton: View {
             Button(action: {
                 withAnimation{
                     if self.shared.previousView == "HomeView" {
-                    //                shared.previousView = self
                         HomeView.show()
-                    //                    .transition(.move(edge: .bottom))
-                    //                    .animation(.spring())
                     } else if self.shared.previousView == "LoginPageView"{
-                                    LoginPageView.show()
+                        LoginPageView.show()
                     } else if self.shared.previousView == "CommitmentDetailedView"{
-                                    CommitmentDetailedView.show()
-                    //                    .transition(.move(edge: .bottom))
-                    //                    .animation(.spring())
+                        CommitmentDetailedView.show()
                     } else if self.shared.previousView == "DiscoverDetailedView"{
-                                    DiscoverDetailedView.show()
-                    //            } else if shared.previousView == "DiscoverListView"{
-                    //                DiscoverListView()
-                                } else if self.shared.previousView == "CommitmentsListView"{
-                                    CommitmentsListView.show()
-                                } else if self.shared.previousView == "AddNeedView"{
-                                    AddNeedView.show()
-                                } else if self.shared.previousView == "NeederView"{
-                                    NeederView.show()
-                                } else if self.shared.previousView == "FullDiscoverView"{
-                                    FullDiscoverView.show()
-                                }
+                        DiscoverDetailedView.show()
+                    } else if self.shared.previousView == "CommitmentsListView"{
+                        CommitmentsListView.show()
+                    } else if self.shared.previousView == "AddNeedView"{
+                        AddNeedView.show()
+                    } else if self.shared.previousView == "NeederHomeView"{
+                        NeederHomeView.show()
+                    } else if self.shared.previousView == "FullDiscoverView"{
+                        FullDiscoverView.show()
+                    } else if self.shared.previousView == "NeedsListView"{
+                        NeedsListView.show()
+                    } else if self.shared.previousView == "LoadingPageView" {
+                        LoadingPageView.show()
                     }
-                }){
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.largeTitle)
-                        .foregroundColor(Color(#colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)))
+                }
+            }){
+                Image(systemName: "xmark.circle.fill")
+                    .font(.largeTitle)
+                    .foregroundColor(Color(#colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)))
             }
         }
     }
@@ -67,31 +64,31 @@ struct NeederButton: View {
     @EnvironmentObject var shared: Shared
     
     var body: some View {
-            Button(action: {
-                withAnimation{
-                    NeederView.show()
-self.shared.helperMode = false
-                }}){
-                    Image(systemName: "person")
-                        .font(.largeTitle)
-                        .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-            }
-        
+        Button(action: {
+            withAnimation{
+                NeederHomeView.show()
+                self.shared.helperMode = false
+            }}){
+                Image(systemName: "person")
+                    .font(.largeTitle)
+                    .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+        }
     }
 }
 
 struct DoItButton: View {
     @EnvironmentObject var shared: Shared
+    let dbController = (UIApplication.shared.delegate as! AppDelegate).dbController
     
     var body: some View {
         HStack{
             Spacer()
             Button(action: {
                 print("I'll do it")
-                print("TEST: \(self.shared.selectedCommitment.userInfo.email!) and \(self.shared.selectedCommitment.ID)")
+//                print("TEST: \(self.shared.selectedCommitment.userInfo.email!) and \(self.shared.selectedCommitment.ID)")
                 let coreDataController = CoreDataController()
-                self.insertCommitment(userEmail: coreDataController.getLoggedUser().1.email!, commitId: self.shared.selectedCommitment.ID)
-//                NeederView.show()
+                self.dbController.insertCommitment(userEmail: coreDataController.getLoggedUser().1.email!, commitId: self.shared.selectedCommitment.ID)
+                HomeView.show()
             }) {
                 HStack{
                     Text("I'll do it ")
@@ -105,45 +102,13 @@ struct DoItButton: View {
                 .cornerRadius(40)
                 .foregroundColor(.white)
                 .overlay(
-                RoundedRectangle(cornerRadius: 40)
-                    .stroke(Color(.systemBlue), lineWidth: 0).foregroundColor(Color(.systemBlue))
+                    RoundedRectangle(cornerRadius: 40)
+                        .stroke(Color(.systemBlue), lineWidth: 0).foregroundColor(Color(.systemBlue))
                 )
             }.buttonStyle(PlainButtonStyle())
             Spacer()
         }
     }
-    
-    
-    
-    //    MARK: COMMITMENT
-    //    To Do
-        func insertCommitment(userEmail: String, commitId: Int) {
-            
-            let parameters: [String: String] = ["userEmail": userEmail, "commitId": "\(commitId)"]
-                    
-            //create the url with URL
-            let url = URL(string: "http://10.24.48.197:8080/NewBackOn-0.0.1-SNAPSHOT/InsertCommitment")! //change the url
-            
-            //now create the URLRequest object using the url object
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST" //set http method as POST
-            
-            do {
-                request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
-                
-            } catch let error {
-                print(error.localizedDescription)
-            }
-            
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
-                        
-            //create dataTask using the session object to send data to the server
-            
-            //SE VOGLIO LEGGERE I DATI DAL SERVER
-            URLSession.shared.dataTask(with: request) { data, response, error in
-            }.resume()
-        }
     
 }
 
@@ -155,7 +120,7 @@ struct CantDoItButton: View {
             Spacer()
             Button(action: {
                 print("Can't do it")
-                AddNeedView.show()
+                HomeView.show()
             }) {
                 HStack{
                     Text("Can't do it ")
@@ -169,8 +134,8 @@ struct CantDoItButton: View {
                 .cornerRadius(40)
                 .foregroundColor(.white)
                 .overlay(
-                RoundedRectangle(cornerRadius: 40)
-                    .stroke(Color(.systemRed), lineWidth: 0).foregroundColor(Color(.systemRed))
+                    RoundedRectangle(cornerRadius: 40)
+                        .stroke(Color(.systemRed), lineWidth: 0).foregroundColor(Color(.systemRed))
                 )
             }.buttonStyle(PlainButtonStyle())
             Spacer()
@@ -178,11 +143,37 @@ struct CantDoItButton: View {
     }
 }
 
-struct DoItButton_Previews: PreviewProvider {
-    static var previews: some View {
-        DoItButton()
+struct DontNeedAnymoreButton: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+        HStack{
+            Spacer()
+            Button(action: {
+                print("Don't Need Anymore")
+                NeederHomeView.show()
+            }) {
+                HStack{
+                    Text("Don't need anymore ")
+                        .fontWeight(.regular)
+                        .font(.title)
+                    Image(systemName: "hand.thumbsup")
+                        .font(.title)
+                }
+                .padding(20)
+                .background(Color(.systemRed))
+                .cornerRadius(40)
+                .foregroundColor(.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 40)
+                        .stroke(Color(.systemRed), lineWidth: 0).foregroundColor(Color(.systemRed))
+                )
+            }.buttonStyle(PlainButtonStyle())
+            Spacer()
+        }
     }
 }
+
 
 struct AddNeedButton: View {
     @EnvironmentObject var shared: Shared
@@ -200,76 +191,36 @@ struct AddNeedButton: View {
                         .font(.title)
                     Image(systemName: "person.2")
                         .font(.title)
-
+                    
                 }
                 .padding(20)
                 .background(Color.blue)
                 .cornerRadius(40)
                 .foregroundColor(.white)
                 .overlay(
-                RoundedRectangle(cornerRadius: 40)
-                    .stroke(Color.blue, lineWidth: 1).foregroundColor(Color.blue)
+                    RoundedRectangle(cornerRadius: 40)
+                        .stroke(Color.blue, lineWidth: 1).foregroundColor(Color.blue)
                 )
             }
             Spacer()
         }
     }
-    
-    func insertCommit(title: String, description: String, date: Date, latitude: Double, longitude: Double) {
-        print("INSERT COMMIT")
-        let coreDataController: CoreDataController = CoreDataController()
-        
-        let userEmail: String = coreDataController.getLoggedUser().1.email!
-        
-        let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd HH:mm"
-        let formattedDate = format.string(from: date)
-        print(formattedDate)
-        
-        let parameters: [String: String] = ["title":"\(title)", "description": "\(description)", "email": userEmail, "date":"\(formattedDate)","latitude":"\(latitude)", "longitude":"\(longitude)"]
-        
-        //create the url with URL
-        let url = URL(string: "http://\(shared.myIP):8180/NewBackOn-0.0.1-SNAPSHOT/InsertCommit")! //change the url
-        
-        //now create the URLRequest object using the url object
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST" //set http method as POST
-        
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
-            
-        } catch let error {
-            print(error.localizedDescription)
-        }
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        //create dataTask using the session object to send data to the server
-        
-        //SE VOGLIO LEGGERE I DATI DAL SERVER
-        URLSession.shared.dataTask(with: request) { data, response, error in
-        }.resume()
-    }
 }
 
-struct AddNeedButton_Previews: PreviewProvider {
-    static var previews: some View {
-        AddNeedButton()
-    }
-}
 
 struct ConfirmAddNeedButton: View {
     @EnvironmentObject var shared: Shared
+    let dbController = (UIApplication.shared.delegate as! AppDelegate).dbController
     
     var body: some View {
         HStack{
             Spacer()
             Button(action: {
                 print("Add need!")
-//                IMPORTANTE SALVA NEED E INVIALO AL SERVER
-                NeederView.show()
-                self.insertCommit(title: "Titolo1", description: "Descrizione", date: Date(), latitude: 41, longitude: 15)
+                //                IMPORTANTE SALVA NEED E INVIALO AL SERVER
+                NeederHomeView.show()
+                self.dbController.insertCommit(title: "Titolo1", description: "Descrizione", date: Date(), latitude: 41, longitude: 15)
+                self.dbController.getCommitByUser()
             }) {
                 HStack{
                     Text("Confirm ")
@@ -282,60 +233,11 @@ struct ConfirmAddNeedButton: View {
                 .cornerRadius(40)
                 .foregroundColor(.white)
                 .overlay(
-                RoundedRectangle(cornerRadius: 40)
-                    .stroke(Color.blue, lineWidth: 1).foregroundColor(Color.blue)
+                    RoundedRectangle(cornerRadius: 40)
+                        .stroke(Color.blue, lineWidth: 1).foregroundColor(Color.blue)
                 )
             }
             Spacer()
         }
     }
-    
-    
-    
-    
-       //MARK: InsertCommit
-       func insertCommit(title: String, description: String, date: Date, latitude: Double, longitude: Double) {
-           print("INSERT COMMIT")
-           let coreDataController: CoreDataController = CoreDataController()
-           
-           let userEmail: String = coreDataController.getLoggedUser().1.email!
-           
-           let format = DateFormatter()
-           format.dateFormat = "yyyy-MM-dd HH:mm"
-           let formattedDate = format.string(from: date)
-           print(formattedDate)
-           
-           let parameters: [String: String] = ["title":"\(title)", "description": "\(description)", "email": userEmail, "date":"\(formattedDate)","latitude":"\(latitude)", "longitude":"\(longitude)"]
-           
-           //create the url with URL
-           let url = URL(string: "http://\(shared.myIP):8080/NewBackOn-0.0.1-SNAPSHOT/InsertCommit")! //change the url
-           
-           //now create the URLRequest object using the url object
-           var request = URLRequest(url: url)
-           request.httpMethod = "POST" //set http method as POST
-           
-           do {
-               request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
-               
-           } catch let error {
-               print(error.localizedDescription)
-           }
-           
-           request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-           request.addValue("application/json", forHTTPHeaderField: "Accept")
-           
-           //create dataTask using the session object to send data to the server
-           
-           //SE VOGLIO LEGGERE I DATI DAL SERVER
-           URLSession.shared.dataTask(with: request) { data, response, error in
-           }.resume()
-       }
-    
 }
-
-struct ConfirmAddNeedButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ConfirmAddNeedButton()
-    }
-}
-

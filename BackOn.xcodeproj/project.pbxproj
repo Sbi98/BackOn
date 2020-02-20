@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		12F3808E23FBE6AA00B35497 /* AddNeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3808D23FBE6AA00B35497 /* AddNeedView.swift */; };
-		14817F8723F82BB00051A89A /* NeederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14817F8523F82BB00051A89A /* NeederView.swift */; };
-		2F05562323FEBEBD00B6165F /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F05562223FEBEBD00B6165F /* Spinner.swift */; };
-		2F05562523FEBF2400B6165F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F05562423FEBF2400B6165F /* LoadingView.swift */; };
+		1418E0D623FEE8EB00C2B166 /* LoadingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1418E0D523FEE8EA00C2B166 /* LoadingPageView.swift */; };
+		1418E0D823FEEB7300C2B166 /* NeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1418E0D723FEEB7300C2B166 /* NeedView.swift */; };
+		1418E0DA23FEEBE700C2B166 /* UserPreviewNeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1418E0D923FEEBE700C2B166 /* UserPreviewNeeder.swift */; };
+		14457B3A23FEF2F500B617FF /* NeedDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14457B3923FEF2F500B617FF /* NeedDetailedView.swift */; };
+		14817F8723F82BB00051A89A /* NeederHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14817F8523F82BB00051A89A /* NeederHomeView.swift */; };
 		2F0AA70323FBD53E008DA6E3 /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AA70223FBD53E008DA6E3 /* DatabaseController.swift */; };
 		2F1075A123FD6DB70076C507 /* MapViewDiscoverDetailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10759D23FD6DB70076C507 /* MapViewDiscoverDetailed.swift */; };
 		2F1075A223FD6DB70076C507 /* MapViewDiscover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10759E23FD6DB70076C507 /* MapViewDiscover.swift */; };
@@ -46,9 +48,11 @@
 /* Begin PBXFileReference section */
 		01877A788D3892A7C4FC0E62 /* Pods-BackOn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackOn.debug.xcconfig"; path = "Target Support Files/Pods-BackOn/Pods-BackOn.debug.xcconfig"; sourceTree = "<group>"; };
 		12F3808D23FBE6AA00B35497 /* AddNeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNeedView.swift; sourceTree = "<group>"; };
-		14817F8523F82BB00051A89A /* NeederView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeederView.swift; sourceTree = "<group>"; };
-		2F05562223FEBEBD00B6165F /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
-		2F05562423FEBF2400B6165F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		1418E0D523FEE8EA00C2B166 /* LoadingPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingPageView.swift; sourceTree = "<group>"; };
+		1418E0D723FEEB7300C2B166 /* NeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeedView.swift; sourceTree = "<group>"; };
+		1418E0D923FEEBE700C2B166 /* UserPreviewNeeder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreviewNeeder.swift; sourceTree = "<group>"; };
+		14457B3923FEF2F500B617FF /* NeedDetailedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeedDetailedView.swift; sourceTree = "<group>"; };
+		14817F8523F82BB00051A89A /* NeederHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeederHomeView.swift; sourceTree = "<group>"; };
 		2F0AA70223FBD53E008DA6E3 /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		2F10759D23FD6DB70076C507 /* MapViewDiscoverDetailed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewDiscoverDetailed.swift; sourceTree = "<group>"; };
 		2F10759E23FD6DB70076C507 /* MapViewDiscover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewDiscover.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 		2F57601B23F6B467001D97F6 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				1418E0D923FEEBE700C2B166 /* UserPreviewNeeder.swift */,
 				2F57601C23F6B467001D97F6 /* UserInfo.swift */,
 				2F57601D23F6B467001D97F6 /* UserPreview.swift */,
 				2F57601E23F6B467001D97F6 /* Avatar.swift */,
@@ -188,16 +193,19 @@
 		2F57601F23F6B467001D97F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2F1075A523FD6DD50076C507 /* OverlayView.swift */,
+				14457B3923FEF2F500B617FF /* NeedDetailedView.swift */,
 				2F10759C23FD6DB70076C507 /* MapViews */,
+				1418E0D523FEE8EA00C2B166 /* LoadingPageView.swift */,
+				2F1075A523FD6DD50076C507 /* OverlayView.swift */,
 				12F3808D23FBE6AA00B35497 /* AddNeedView.swift */,
+				1418E0D723FEEB7300C2B166 /* NeedView.swift */,
 				2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */,
 				2F57602623F6B467001D97F6 /* CommitmentView.swift */,
 				81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */,
 				2F57602523F6B467001D97F6 /* DiscoverView.swift */,
 				2F57602423F6B467001D97F6 /* HomeView.swift */,
 				2F575FFD23F686F7001D97F6 /* LoginPageView.swift */,
-				14817F8523F82BB00051A89A /* NeederView.swift */,
+				14817F8523F82BB00051A89A /* NeederHomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,8 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				2F57603623F6B4D1001D97F6 /* Commitment.swift */,
-				2F05562223FEBEBD00B6165F /* Spinner.swift */,
-				2F05562423FEBF2400B6165F /* LoadingView.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -374,11 +380,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F57602C23F6B467001D97F6 /* CommitmentDetailedView.swift in Sources */,
-				2F05562323FEBEBD00B6165F /* Spinner.swift in Sources */,
+				1418E0D623FEE8EB00C2B166 /* LoadingPageView.swift in Sources */,
 				2FEAAF1723F820A000225F13 /* CoreDataController.swift in Sources */,
 				2F575FF723F686F7001D97F6 /* AppDelegate.swift in Sources */,
-				14817F8723F82BB00051A89A /* NeederView.swift in Sources */,
-				2F05562523FEBF2400B6165F /* LoadingView.swift in Sources */,
+				14817F8723F82BB00051A89A /* NeederHomeView.swift in Sources */,
 				2F0AA70323FBD53E008DA6E3 /* DatabaseController.swift in Sources */,
 				2F57602E23F6B467001D97F6 /* HomeView.swift in Sources */,
 				2F57603723F6B4D1001D97F6 /* Commitment.swift in Sources */,
@@ -388,16 +393,19 @@
 				2F57602723F6B467001D97F6 /* UserInfo.swift in Sources */,
 				2F57602F23F6B467001D97F6 /* DiscoverView.swift in Sources */,
 				2F1075A423FD6DB70076C507 /* MapViewCommitment.swift in Sources */,
+				14457B3A23FEF2F500B617FF /* NeedDetailedView.swift in Sources */,
 				2F57603423F6B4AC001D97F6 /* ContentView.swift in Sources */,
 				2F1075A323FD6DB70076C507 /* MapViewCommitmentDetailed.swift in Sources */,
 				2F57603023F6B467001D97F6 /* CommitmentView.swift in Sources */,
 				2F57602823F6B467001D97F6 /* UserPreview.swift in Sources */,
 				12F3808E23FBE6AA00B35497 /* AddNeedView.swift in Sources */,
+				1418E0DA23FEEBE700C2B166 /* UserPreviewNeeder.swift in Sources */,
 				2F575FFE23F686F7001D97F6 /* LoginPageView.swift in Sources */,
 				2F1075A223FD6DB70076C507 /* MapViewDiscover.swift in Sources */,
 				2F57601723F6A9A2001D97F6 /* SharedResources.swift in Sources */,
 				81A0C4B923F9C6F00065CC87 /* DiscoverDetailedView.swift in Sources */,
 				2F57602923F6B467001D97F6 /* Avatar.swift in Sources */,
+				1418E0D823FEEB7300C2B166 /* NeedView.swift in Sources */,
 				2F57603223F6B495001D97F6 /* UIElements.swift in Sources */,
 				2F1075A123FD6DB70076C507 /* MapViewDiscoverDetailed.swift in Sources */,
 				2F575FFC23F686F7001D97F6 /* BackOn.xcdatamodeld in Sources */,

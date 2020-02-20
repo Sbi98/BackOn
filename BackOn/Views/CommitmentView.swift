@@ -74,32 +74,8 @@ struct CommitmentRow: View {
                 }
                 .padding(20)
             }.offset(x: 0, y: -20)
-        }.onAppear(perform: getCommitByUser)
-    }
-    
-    
-    //MARK: GetCommitByUser
-    func getCommitByUser() {
-        print("*** getCommitByUser ***")
-        let coreDataController: CoreDataController = CoreDataController()
-        let userEmail: String = coreDataController.getLoggedUser().1.email!
-        let parameters: [String: String] = ["email": userEmail]
-        
-        //create the url with URL
-        let url = URL(string: "http://95.245.183.186:8180/NewBackOn-0.0.1-SNAPSHOT/GetCommitByUserEmail")! //change the url
-        
-        //now create the URLRequest object using the url object
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST" //set http method as POST
-        
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
-            
-        } catch let error {
-            print(error.localizedDescription)
         }
     }
-    
 }
 
 
@@ -107,8 +83,6 @@ struct CommitmentsListView: View {
     @EnvironmentObject var shared: Shared
     
     var body: some View {
-        
-        
         VStack (alignment: .leading, spacing: 10){
             Button(action: {withAnimation{
                 print("CIAO\n\n\n")
@@ -148,20 +122,4 @@ struct CommitmentsListView: View {
         .edgesIgnoringSafeArea(.all)
     }
 }
-
-struct Result: Codable {
-    var id: String
-    var descrizione: String
-}
-
-
-#if DEBUG
-struct CommitmentRow_Previews: PreviewProvider {
-    static var previews: some View {
-        CommitmentRow()
-    }
-}
-#endif
-
-
 

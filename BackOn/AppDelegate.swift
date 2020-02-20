@@ -12,7 +12,13 @@ import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
-    var shared = Shared()
+    let shared = Shared()
+    let dbController: DatabaseController
+    
+    override init() {
+        dbController = DatabaseController(shared: self.shared)
+        super.init()
+    }
     
     //Metodo di accesso
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
@@ -43,9 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         CoreDataController.shared.addUser(user: myUser)
         
 //        FUNZIONE CHE REGISTRA L'UTENTE NEL DATABASE LOCALE (IMPORTANTE AGGIORNARE L'INDIRIZZO IP)
-        DatabaseController.registerUser(user: myUser)
-                
-        HomeView.show()
+        dbController.registerUser(user: myUser)
+        
+        LoadingPageView.show()
     }
     
     

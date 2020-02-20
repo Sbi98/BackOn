@@ -22,28 +22,27 @@ struct ContentView: View {
     var body: some View {
         VStack{
             if shared.viewToShow == "HomeView" {
-//                shared.previousView = self
                 HomeView()
-//                    .transition(.move(edge: .bottom))
-//                    .animation(.spring())
             } else if shared.viewToShow == "LoginPageView"{
                 LoginPageView()
             } else if shared.viewToShow == "CommitmentDetailedView"{
                 CommitmentDetailedView(selectedCommitment: shared.selectedCommitment)
-//                    .transition(.move(edge: .bottom))
-//                    .animation(.spring())
             } else if shared.viewToShow == "DiscoverDetailedView"{
                 DiscoverDetailedView(selectedCommitment: shared.selectedCommitment)
-//            } else if shared.viewToShow == "DiscoverListView"{
-//                DiscoverListView()
             } else if shared.viewToShow == "CommitmentsListView"{
                 CommitmentsListView()
             } else if shared.viewToShow == "AddNeedView"{
                 AddNeedView()
-            } else if shared.viewToShow == "NeederView"{
-                NeederView()
+            } else if shared.viewToShow == "NeederHomeView"{
+                NeederHomeView()
             } else if shared.viewToShow == "FullDiscoverView"{
                 FullDiscoverView()
+            } else if shared.viewToShow == "NeedsListView"{
+                NeedsListView()
+            } else if shared.viewToShow == "LoadingPageView" {
+                LoadingPageView()
+            } else if shared.viewToShow == "NeedDetailedView" {
+                NeedDetailedView(selectedCommitment: shared.selectedCommitment)
             }
             else {
                 Text("Vista sbagliata :(")

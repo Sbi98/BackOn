@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct UserPreview: View {
+struct UserPreviewNeeder: View {
     var user: UserInfo
     var descr: String
     var whiteText: Bool
@@ -36,20 +36,12 @@ struct UserPreview: View {
 //            Avatar(image: "\(user.photo)", size: 60)
             Avatar(image: user.profilePic)
             VStack (alignment: .leading){
-                Text(user.identity)
+                Text("\(user.name)\n\(user.surname)")
                     .font(.title)
                     .fontWeight(.regular)
                     .foregroundColor(textColor)
                     .offset(x: 0, y: -3)
-                    .lineLimit(1)
-                if descr != "" {
-                    Text(descr)
-                        .font(.subheadline)
-                        .fontWeight(.light)
-                        .foregroundColor(textColor)
-                        .offset(x: 0, y: 1)
-                        .lineLimit(2)
-                }
+                    .lineLimit(2)
             }.padding(.leading, 5)
             Spacer()
         }

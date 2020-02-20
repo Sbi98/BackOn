@@ -91,17 +91,8 @@ struct DiscoverRow: View {
                     }.padding(20)
                 }.offset(x: 0, y: -20)
             }
-        }.onAppear(perform: loadCommitByOther)
-    }
-    
-    func loadCommitByOther() {
-        print("loadCommitByOther")
-        guard let url = URL(string: "http://95.245.183.186:8180/NewBackOn-0.0.1-SNAPSHOT/GetAllOtherCommit") else {
-            print("Invalid URL")
-            return
         }
     }
-    
 }
 
 
