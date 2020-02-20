@@ -40,7 +40,7 @@ struct ContentView: View {
             } else if shared.viewToShow == "NeedsListView"{
                 NeedsListView()
             } else if shared.viewToShow == "LoadingPageView" {
-                LoadingPageView()
+                LoadingPageView().transition(.scale)
             } else if shared.viewToShow == "NeedDetailedView" {
                 NeedDetailedView(selectedCommitment: shared.selectedCommitment)
             }

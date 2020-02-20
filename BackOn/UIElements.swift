@@ -88,7 +88,7 @@ struct DoItButton: View {
 //                print("TEST: \(self.shared.selectedCommitment.userInfo.email!) and \(self.shared.selectedCommitment.ID)")
                 let coreDataController = CoreDataController()
                 self.dbController.insertCommitment(userEmail: coreDataController.getLoggedUser().1.email!, commitId: self.shared.selectedCommitment.ID)
-                HomeView.show()
+                self.shared.loading = true
             }) {
                 HStack{
                     Text("I'll do it ")

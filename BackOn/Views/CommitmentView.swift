@@ -74,7 +74,7 @@ struct CommitmentRow: View {
                 }
                 .padding(20)
             }.offset(x: 0, y: -20)
-        }
+        }.frame(width: UIScreen.main.bounds.width, height: CGFloat(400), alignment: .top)
     }
 }
 
