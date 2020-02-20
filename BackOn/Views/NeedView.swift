@@ -22,23 +22,20 @@ struct NeedView: View {
             }
         }) {
             VStack (alignment: .leading, spacing: 5){
-                UserPreviewNeeder(user: need.userInfo, description: need.descr, whiteText: shared.darkMode).offset(y:-10)
-                
+                UserPreviewNeeder(user: need.userInfo, whiteText: shared.darkMode)
                 Text(need.title)
                     .font(.title)
                     .fontWeight(.regular)
                     .foregroundColor(.primary)
-                    .padding(.top, 10)
-                    
                 Text(need.descr)
                     .font(.headline)
                     .fontWeight(.regular)
                     .foregroundColor(.primary)
-                
-                Text(self.shared.dateFormatter.string(from: self.need.date)).foregroundColor(Color.secondary).frame(width: 300, alignment: .trailing).offset(x:-3)
+                Spacer()
+                Text(self.shared.dateFormatter.string(from: self.need.date)).foregroundColor(Color.secondary).frame(width: 300, alignment: .trailing)
             }
-//            .padding(.horizontal, 30)
-            .offset(y: 10)
+            .padding(10)
+            .padding(.leading, 5)
         }
         .buttonStyle(PlainButtonStyle())
         .frame(width: 320, height: 230)
