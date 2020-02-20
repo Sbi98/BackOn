@@ -88,7 +88,10 @@ struct DoItButton: View {
             Spacer()
             Button(action: {
                 print("I'll do it")
-                NeederView.show()
+                print("TEST: \(self.shared.selectedCommitment.userInfo.email!) and \(self.shared.selectedCommitment.ID)")
+                let coreDataController = CoreDataController()
+                self.insertCommitment(userEmail: coreDataController.getLoggedUser().1.email!, commitId: self.shared.selectedCommitment.ID)
+//                NeederView.show()
             }) {
                 HStack{
                     Text("I'll do it ")
@@ -109,6 +112,39 @@ struct DoItButton: View {
             Spacer()
         }
     }
+    
+    
+    
+    //    MARK: COMMITMENT
+    //    To Do
+        func insertCommitment(userEmail: String, commitId: Int) {
+            
+            let parameters: [String: String] = ["userEmail": userEmail, "commitId": "\(commitId)"]
+                    
+            //create the url with URL
+            let url = URL(string: "http://10.24.48.197:8080/NewBackOn-0.0.1-SNAPSHOT/InsertCommitment")! //change the url
+            
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST" //set http method as POST
+            
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+                
+            } catch let error {
+                print(error.localizedDescription)
+            }
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+                        
+            //create dataTask using the session object to send data to the server
+            
+            //SE VOGLIO LEGGERE I DATI DAL SERVER
+            URLSession.shared.dataTask(with: request) { data, response, error in
+            }.resume()
+        }
+    
 }
 
 struct CantDoItButton: View {
