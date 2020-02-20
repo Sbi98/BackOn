@@ -8,11 +8,11 @@ struct AddNeedView: View {
     @ObservedObject var datePickerData = DatePickerData()
     @ObservedObject var titlePickerData = TitlePickerData()
     
-    @State var toggleRepeat = false
-    @State var toggleVerified = false
+    @State var toggleRepeat = false //CONTIENE INFORMAZIONI
+    @State var toggleVerified = false //CONTIENE INFORMAZIONI
     
-    @State var needDescription = ""
-    @ObservedObject var address = Address()
+    @State var needDescription = "" //CONTIENE INFORMAZIONI
+    @ObservedObject var address = Address() //address.address contiene l'address //CONTIENE INFORMAZIONI
     
     var body: some View {
         
@@ -22,6 +22,7 @@ struct AddNeedView: View {
                 Text("Add Need")
                     .font(.title)
                     .fontWeight(.bold)
+                
                 Spacer()
                 CloseButton()
             }
@@ -29,13 +30,14 @@ struct AddNeedView: View {
             .padding(.vertical, 10)
             
             Form{
+                
                 Section(header: Text("Need informations")){
                     //                    Text("Type of your need")
                     //                        .font(.headline)
                     HStack{
                         Text("Title: ")
                             .foregroundColor(Color(.systemBlue))
-                        Text(titlePickerData.titlePickerValue == -1 ? "Click to select your need" : titlePickerData.titles[self.titlePickerData.titlePickerValue])
+                        Text(titlePickerData.titlePickerValue == -1 ? "Click to select your need\t\t\t\t\t\t\t\t\t" : titlePickerData.titles[self.titlePickerData.titlePickerValue])
                             .onTapGesture {
                                 withAnimation {self.titlePickerData.showTitlePicker.toggle()}
                         }
@@ -48,13 +50,16 @@ struct AddNeedView: View {
                             .background(Color.primary.colorInvert())
                             .cornerRadius(5)
                             .font(.callout)
+//
                     }
                 }
+                
+                
                 Section(header: Text("Time")){
                     HStack{
                         Text("Date: ")
                             .foregroundColor(Color(.systemBlue))
-                        Text("\(datePickerData.selectedDate, formatter: self.shared.dateFormatter)")
+                        Text("\(datePickerData.selectedDate, formatter: self.shared.dateFormatter)\t\t\t\t\t\t\t")
                             .onTapGesture {
                                 withAnimation {self.datePickerData.showDatePicker.toggle()}
                         }
@@ -63,10 +68,13 @@ struct AddNeedView: View {
                         Text("Repeat each week at the same hour")
                     }
                 }
+                    
                 Section(header: Text("Location")){
+                        
                         HStack{
                             Text("Place: ")
                                 .foregroundColor(Color(.systemBlue))
+                            
                             Text(self.address.address).onAppear(perform: {
                                 self.shared.textAddress()
                             })
@@ -74,6 +82,7 @@ struct AddNeedView: View {
                         Toggle(isOn: $address.toggleMyActualLocation) {
                             Text("Do you want to set the location where you are right now?")
                         }
+                    
 //                        Manca la selezione del posto fatta bene
                 }
                 Section (header: Text("Need informations")){
@@ -82,15 +91,13 @@ struct AddNeedView: View {
                     }
                 }
             }//CHIUSURA FORM
-                .edgesIgnoringSafeArea(.all)
-                
+//            ANDRÀ CAMIATA LA POSIZIONE
             Spacer()
-            ConfirmAddNeedButton(title: "titolo", description: "descrizione", date: Date(), latitude: 41, longitude: 15)
+            ConfirmAddNeedButton(title: titlePickerData.titles[titlePickerData.titlePickerValue], description: needDescription, date: datePickerData.selectedDate, latitude: self.shared.locationManager.lastLocation!.coordinate.latitude, longitude: self.shared.locationManager.lastLocation!.coordinate.longitude)
             
         } //Chiusura VStack
-//            .edgesIgnoringSafeArea(.all)
             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-//            .background(Color(.systemGray6))
+            .background(Color(.systemGray6))
             .overlay(myOverlay(isPresented: self.$titlePickerData.showTitlePicker, toOverlay: AnyView(TitlePicker(pickerElements: self.titlePickerData.titles, selectedValue: self.$titlePickerData.titlePickerValue))))
             .overlay(myOverlay(isPresented: self.$datePickerData.showDatePicker, toOverlay: AnyView(DataPicker(dataSelezionata: self.$datePickerData.selectedDate))))
         
@@ -141,7 +148,7 @@ struct DataPicker: View {
 
 class Address: ObservableObject {
     let shared = (UIApplication.shared.delegate as! AppDelegate).shared
-    @Published var address = "Insert your address"
+    @Published var address = "Insert your address\t\t\t\t\t\t\t\t\t\t\t"
     @Published var toggleMyActualLocation = false{
         willSet{
             self.address = newValue ? self.shared.addressText : self.address

@@ -18,12 +18,28 @@ struct HomeView: View {
     var body: some View {
         RefreshableScrollView(height: 70, refreshing: self.$shared.loading) {
             VStack{
+                VStack(alignment: .leading){
                 Text("Hi \(CoreDataController().getLoggedUser().1.name)!")
                     .font(.largeTitle)
                     .bold()
                     .fontWeight(.heavy)
-                    .padding(20)
+                    .padding(.top)
+                                    }
 //                          Bottone per notificare il prossimo commitment
+                
+//                Button(action: {
+//                    print("Logout!")
+//                    GIDSignIn.sharedInstance()?.disconnect()
+//                }) {
+//                    Text("Logout")
+//                        .bold()
+//                        .foregroundColor(.black)
+//                }
+                CommitmentRow().frame(width: UIScreen.main.bounds.width, height: CGFloat(400), alignment: .top)
+                DiscoverRow().frame(width: UIScreen.main.bounds.width, height: CGFloat(200), alignment: .top).padding(80)
+//                NeederButton()
+                Spacer()
+                
                 Button("Schedule Notification") {
                     let nextCommitment = getNextNotificableCommitment(dataDictionary: self.shared.commitmentSet)
                     if nextCommitment != nil {
@@ -43,20 +59,7 @@ struct HomeView: View {
                             }
                         }
                     }
-                }
-//                Button(action: {
-//                    print("Logout!")
-//                    GIDSignIn.sharedInstance()?.disconnect()
-//                }) {
-//                    Text("Logout")
-//                        .bold()
-//                        .foregroundColor(.black)
-//                }
-                CommitmentRow()
-                DiscoverRow()
-                    .offset(x: 0, y: -20)
-//                NeederButton()
-//                Spacer()
+                }.padding()
             }
         }
         .padding(.top, 40)
