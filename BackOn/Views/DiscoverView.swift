@@ -100,58 +100,6 @@ struct DiscoverRow: View {
             print("Invalid URL")
             return
         }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let data = data {
-                DispatchQueue.main.async {
-                    
-                    guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else{
-                        print("Error!")
-                        return
-                    }
-                    
-                    if let array = json as? NSArray {
-                        for obj in array {
-                            if let dict = obj as? NSDictionary {
-
-                                let id = dict.value(forKey: "id")
-                                let descrizione = dict.value(forKey: "description")
-                                let data = dict.value(forKey: "date")
-                                let latitude = dict.value(forKey: "latitude")
-                                let longitude = dict.value(forKey: "longitude")
-                                let userEmail = dict.value(forKey: "userEmail")
-                                let userPhoto = dict.value(forKey: "userPhoto")
-                                let userSurname = dict.value(forKey: "userSurname")
-                                let userName = dict.value(forKey: "userName")
-                                let title = dict.value(forKey: "titolo")
-                                let userStatus = dict.value(forKey: "userStatus")
-                                
-                                let dateFormatter = DateFormatter()
-                                dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-                                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-                                let date = dateFormatter.date(from:"\(data!)")!
-                                
-                                let position: CLLocation = CLLocation(latitude: (latitude as! NSString).doubleValue, longitude: (longitude as! NSString).doubleValue)
-                                
-
-                                let user = UserInfo(name: userName! as! String, surname: userSurname! as! String, email: userEmail! as! String, url: URL(string: userPhoto! as! String)!, isHelper: userStatus! as! Int)
-
-
-                                let c = Commitment(userInfo: user, title: title! as! String, descr: descrizione! as! String, date: date , position: position, ID: id! as! Int)
-
-                                //AGGIUNGERE CONTROLLO CHE PRENDE DA CORE DATA L'UTENTE LOGGATO E CONFRONTA LA SUA EMAIL CON userEmail.
-                                //Se è uguale non deve fare questo comando qui sotto!
-                                self.shared.discoverSet[id! as! Int] = c
-                            }
-                        }
-                    }
-                }
-            }
-        }.resume()
     }
     
 }

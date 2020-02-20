@@ -61,7 +61,6 @@ class CoreDataController {
                 return ("Nil", UserInfo(photo: URL(string: "")!, name: "", surname: "", email: ""))
             }
             let myUser = UserInfo(photo: array[0].photo!, name: array[0].name!, surname: array[0].surname!, email: array[0].email!)
-            print("Utente: \(myUser.name), \(myUser.surname), \(myUser.email!), \(myUser.photo)")
             return ("OK", myUser)
         } catch let error {
             print("Error while getting logged user: \(error.localizedDescription)")

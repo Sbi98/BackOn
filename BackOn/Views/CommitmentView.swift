@@ -47,8 +47,6 @@ struct CommitmentView: View {
 
 struct CommitmentRow: View {
     @EnvironmentObject var shared: Shared
-    @State private var results = [Result]()
-    @State private var myCommits = Dictionary<Int, Commitment>()
     
     var body: some View {
         VStack (alignment: .leading){
@@ -100,57 +98,8 @@ struct CommitmentRow: View {
         } catch let error {
             print(error.localizedDescription)
         }
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        //create dataTask using the session object to send data to the server
-        
-        //SE VOGLIO LEGGERE I DATI DAL SERVER
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let data = data {
-                DispatchQueue.main.async {
-                    
-                    guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else{
-                        print("Error!")
-                        return
-                    }
-                    
-                    if let array = json as? NSArray {
-                        for obj in array {
-                            if let dict = obj as? NSDictionary {
-                                
-                                let id = dict.value(forKey: "id")
-                                let descrizione = dict.value(forKey: "description")
-                                let data = dict.value(forKey: "date")
-                                let latitude = dict.value(forKey: "latitude")
-                                let longitude = dict.value(forKey: "longitude")
-                                let userEmail = dict.value(forKey: "userEmail")
-                                let userPhoto = dict.value(forKey: "userPhoto")
-                                let userSurname = dict.value(forKey: "userSurname")
-                                let userName = dict.value(forKey: "userName")
-                                let userStatus = dict.value(forKey: "userStatus")
-                                let title = dict.value(forKey: "titolo")
-                                
-                                let dateFormatter = DateFormatter()
-                                dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-                                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-                                let date = dateFormatter.date(from:"\(data!)")!
-                                
-                                let position: CLLocation = CLLocation(latitude: (latitude as! NSString).doubleValue, longitude: (longitude as! NSString).doubleValue)
-                                
-                                let user = UserInfo(name: userName! as! String, surname: userSurname! as! String, email: userEmail! as! String, url: URL(string: userPhoto! as! String)!, isHelper: userStatus! as! Int)
-                                
-                                let c = Commitment(userInfo: user, title: title! as! String, descr: descrizione! as! String, date: date , position: position, ID: id! as! Int)
-                                
-                                self.shared.commitmentSet[id! as! Int] = c
-                            }
-                        }
-                    }
-                }
-            }
-        }.resume()
     }
+    
 }
 
 
@@ -161,7 +110,9 @@ struct CommitmentsListView: View {
         
         
         VStack (alignment: .leading, spacing: 10){
-            Button(action: {withAnimation{HomeView.show()}}) {
+            Button(action: {withAnimation{
+                print("CIAO\n\n\n")
+                HomeView.show()}}) {
                 HStack {
                     Image(systemName: "chevron.left")
                         .font(.headline).foregroundColor(Color(UIColor.systemBlue))

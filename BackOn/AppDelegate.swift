@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
 //        FUNZIONE CHE REGISTRA L'UTENTE NEL DATABASE LOCALE (IMPORTANTE AGGIORNARE L'INDIRIZZO IP)
         DatabaseController.registerUser(user: myUser)
-        
+                
         HomeView.show()
     }
     
