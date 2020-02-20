@@ -106,10 +106,11 @@ struct NeedsListView: View {
                         .fontWeight(.bold)
                         .font(.title)
                         .padding(.leading, 5)
+                    Spacer()
                 }.padding([.top,.horizontal])
-            }.buttonStyle(PlainButtonStyle())
+                }.buttonStyle(PlainButtonStyle())
             
-            ScrollView(.vertical, showsIndicators: false) {
+            RefreshableScrollView(height: 80, refreshing: self.$shared.loading) {
                 VStack (alignment: .center, spacing: 25){
                     ForEach(shared.needArray(), id: \.ID) { currentCommitment in
                         Button(action: {withAnimation{

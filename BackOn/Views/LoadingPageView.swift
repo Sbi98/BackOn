@@ -47,7 +47,7 @@ struct LoadingPageView: View {
                     self.dbController.getCommitByUser()
                 }
                 print("Mando la dispatch!\n")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                     if self.shared.helperMode {
                         HomeView.show()
                     } else {

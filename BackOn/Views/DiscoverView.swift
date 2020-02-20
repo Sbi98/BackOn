@@ -119,7 +119,7 @@ struct FullDiscoverView: View {
                 Text("List").tag(0)
                 Text("Map").tag(1)
             }.pickerStyle(SegmentedPickerStyle()).labelsHidden().padding(.horizontal)
-            if selectedView == 0 {ScrollView(.vertical, showsIndicators: false) {
+            if selectedView == 0 {RefreshableScrollView(height: 70, refreshing: self.$shared.loading) {
                 VStack (alignment: .center, spacing: 25){
                     ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
                         Button(action: {
