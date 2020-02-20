@@ -81,9 +81,8 @@ struct NeedsRow: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
                         ForEach(shared.needArray(), id: \.ID) { currentDiscover in
-                            NeedView(need: currentDiscover).frame(width: 320, height: 230)
+                            NeedView(need: currentDiscover).frame(width: 330, height: 230)
                         }
-
                     }.padding(20)
                 }.offset(x: 0, y: -20)
             }
