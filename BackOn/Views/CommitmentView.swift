@@ -75,7 +75,7 @@ struct CommitmentRow: View {
                 .padding(20)
             }.offset(x: 0, y: -20)
         }
-    }//onAppear(loadYourCommitment) DA FARE
+    }
     
 }
 
@@ -87,7 +87,9 @@ struct CommitmentsListView: View {
         
         
         VStack (alignment: .leading, spacing: 10){
-            Button(action: {withAnimation{HomeView.show()}}) {
+            Button(action: {withAnimation{
+                print("CIAO\n\n\n")
+                HomeView.show()}}) {
                 HStack {
                     Image(systemName: "chevron.left")
                         .font(.headline).foregroundColor(Color(UIColor.systemBlue))

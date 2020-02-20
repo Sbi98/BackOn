@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		12F3808E23FBE6AA00B35497 /* AddNeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3808D23FBE6AA00B35497 /* AddNeedView.swift */; };
 		14817F8723F82BB00051A89A /* NeederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14817F8523F82BB00051A89A /* NeederView.swift */; };
+		2F05562323FEBEBD00B6165F /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F05562223FEBEBD00B6165F /* Spinner.swift */; };
+		2F05562523FEBF2400B6165F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F05562423FEBF2400B6165F /* LoadingView.swift */; };
 		2F0AA70323FBD53E008DA6E3 /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AA70223FBD53E008DA6E3 /* DatabaseController.swift */; };
 		2F1075A123FD6DB70076C507 /* MapViewDiscoverDetailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10759D23FD6DB70076C507 /* MapViewDiscoverDetailed.swift */; };
 		2F1075A223FD6DB70076C507 /* MapViewDiscover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F10759E23FD6DB70076C507 /* MapViewDiscover.swift */; };
@@ -45,6 +47,8 @@
 		01877A788D3892A7C4FC0E62 /* Pods-BackOn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackOn.debug.xcconfig"; path = "Target Support Files/Pods-BackOn/Pods-BackOn.debug.xcconfig"; sourceTree = "<group>"; };
 		12F3808D23FBE6AA00B35497 /* AddNeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNeedView.swift; sourceTree = "<group>"; };
 		14817F8523F82BB00051A89A /* NeederView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeederView.swift; sourceTree = "<group>"; };
+		2F05562223FEBEBD00B6165F /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		2F05562423FEBF2400B6165F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		2F0AA70223FBD53E008DA6E3 /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		2F10759D23FD6DB70076C507 /* MapViewDiscoverDetailed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewDiscoverDetailed.swift; sourceTree = "<group>"; };
 		2F10759E23FD6DB70076C507 /* MapViewDiscover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewDiscover.swift; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 			isa = PBXGroup;
 			children = (
 				2F57603623F6B4D1001D97F6 /* Commitment.swift */,
+				2F05562223FEBEBD00B6165F /* Spinner.swift */,
+				2F05562423FEBF2400B6165F /* LoadingView.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -368,9 +374,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F57602C23F6B467001D97F6 /* CommitmentDetailedView.swift in Sources */,
+				2F05562323FEBEBD00B6165F /* Spinner.swift in Sources */,
 				2FEAAF1723F820A000225F13 /* CoreDataController.swift in Sources */,
 				2F575FF723F686F7001D97F6 /* AppDelegate.swift in Sources */,
 				14817F8723F82BB00051A89A /* NeederView.swift in Sources */,
+				2F05562523FEBF2400B6165F /* LoadingView.swift in Sources */,
 				2F0AA70323FBD53E008DA6E3 /* DatabaseController.swift in Sources */,
 				2F57602E23F6B467001D97F6 /* HomeView.swift in Sources */,
 				2F57603723F6B4D1001D97F6 /* Commitment.swift in Sources */,
