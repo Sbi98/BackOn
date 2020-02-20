@@ -23,6 +23,7 @@ struct NeedView: View {
         }) {
             VStack (alignment: .leading, spacing: 5){
                 UserPreviewNeeder(user: need.userInfo, whiteText: shared.darkMode)
+                Spacer()
                 Text(need.title)
                     .font(.title)
                     .fontWeight(.regular)
@@ -38,7 +39,7 @@ struct NeedView: View {
             .padding(.leading, 5)
         }
         .buttonStyle(PlainButtonStyle())
-        .frame(width: 320, height: 230)
+        .frame(width: 330, height: 230)
         .background(Color.primary.colorInvert())
         .cornerRadius(10)
         .shadow(radius: 10)

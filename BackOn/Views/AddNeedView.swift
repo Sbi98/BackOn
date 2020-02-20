@@ -13,6 +13,8 @@ struct AddNeedView: View {
     
     @State var needDescription = "" //CONTIENE INFORMAZIONI
     @ObservedObject var address = Address() //address.address contiene l'address //CONTIENE INFORMAZIONI
+
+    let dbController = (UIApplication.shared.delegate as! AppDelegate).dbController
     
     var body: some View {
         
@@ -87,14 +89,38 @@ struct AddNeedView: View {
             }//CHIUSURA FORM
 //            ANDRÀ CAMIATA LA POSIZIONE
             Spacer()
-            ConfirmAddNeedButton(title: titlePickerData.titles[titlePickerData.titlePickerValue], description: needDescription, date: datePickerData.selectedDate, latitude: self.shared.locationManager.lastLocation!.coordinate.latitude, longitude: self.shared.locationManager.lastLocation!.coordinate.longitude)
+            HStack {
+                Spacer()
+                Button(action: {
+                    print("Add need!")
+                    //                IMPORTANTE SALVA NEED E INVIALO AL SERVER
+                    NeederHomeView.show()
+                    self.dbController.insertCommit(title: self.titlePickerData.titles[self.titlePickerData.titlePickerValue], description: self.needDescription, date: self.datePickerData.selectedDate, latitude: self.shared.locationManager.lastLocation!.coordinate.latitude, longitude: self.shared.locationManager.lastLocation!.coordinate.longitude)
+                    self.dbController.getCommitByUser()
+                }) {
+                    HStack{
+                        Text("Confirm ")
+                            .fontWeight(.regular)
+                        Image(systemName: "hand.thumbsup")
+                    }
+                    .font(.title)
+                    .padding(20)
+                    .background(Color.blue)
+                    .cornerRadius(40)
+                    .foregroundColor(.white)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 40)
+                            .stroke(Color.blue, lineWidth: 1).foregroundColor(Color.blue)
+                    )
+                }
+                Spacer()
+            }
             
         } //Chiusura VStack
             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
             .background(Color(.systemGray6))
             .overlay(myOverlay(isPresented: self.$titlePickerData.showTitlePicker, toOverlay: AnyView(TitlePicker(pickerElements: self.titlePickerData.titles, selectedValue: self.$titlePickerData.titlePickerValue))))
             .overlay(myOverlay(isPresented: self.$datePickerData.showDatePicker, toOverlay: AnyView(DataPicker(dataSelezionata: self.$datePickerData.selectedDate))))
-        
     }
 }
 

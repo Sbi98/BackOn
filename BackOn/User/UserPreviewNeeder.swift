@@ -27,14 +27,12 @@ struct UserPreviewNeeder: View {
     var body: some View {
         HStack {
             Avatar(image: user.profilePic)
-            VStack (alignment: .leading){
-                Text("\(user.name)\n\(user.surname)")
-                    .font(.title)
-                    .fontWeight(.regular)
-                    .foregroundColor(textColor)
-                    .offset(x: 0, y: -3)
-                    .lineLimit(2)
-            }.padding(.leading, 5)
+            Text("\(user.name)\n\(user.surname)")
+                .font(.title)
+                .fontWeight(.regular)
+                .foregroundColor(textColor)
+                .scaleEffect(0.9)
+                .lineLimit(2)
             Spacer()
         }
     }
