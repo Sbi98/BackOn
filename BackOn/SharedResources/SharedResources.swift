@@ -27,7 +27,6 @@ class Shared: ObservableObject {
                 }
                 self.loading = false
             }
-            
         }
     }
     @Published var previousView = "HomeView"
@@ -38,7 +37,7 @@ class Shared: ObservableObject {
     @Published var commitmentSet: [Int:Commitment] = [:]
     @Published var discoverSet: [Int:Commitment] = [:]
     @Published var needSet: [Int:Commitment] = [:]
-    @Published var helperMode = true
+    @Published var helperMode = false
     @Published var addressText = "Click to insert the address"
     func textAddress(){
             CLGeocoder().reverseGeocodeLocation(locationManager.lastLocation!, completionHandler: {(placemarks, error) in

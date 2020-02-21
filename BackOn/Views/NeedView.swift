@@ -22,26 +22,24 @@ struct NeedView: View {
             }
         }) {
             VStack (alignment: .leading, spacing: 5){
-                //UserPreview(user: commitment.userInfo, description: "\(commitment.etaText)", whiteText: shared.darkMode)
-                UserPreviewNeeder(user: need.userInfo, description: need.descr, whiteText: shared.darkMode).offset(y:-10)
-                
+                UserPreviewNeeder(user: need.userInfo, whiteText: shared.darkMode)
+                Spacer()
                 Text(need.title)
                     .font(.title)
                     .fontWeight(.regular)
                     .foregroundColor(.primary)
-                    .padding(.top, 20)
                 Text(need.descr)
                     .font(.headline)
                     .fontWeight(.regular)
                     .foregroundColor(.primary)
-                
-                Text(self.shared.dateFormatter.string(from: self.need.date)).foregroundColor(Color.secondary).frame(width: 300, alignment: .trailing).offset(x:-3)
-            }.padding(.horizontal, 20).offset(y:10)
-
-                .frame(width: CGFloat(320), height: CGFloat(230))
+                Spacer()
+                Text(self.shared.dateFormatter.string(from: self.need.date)).foregroundColor(Color.secondary).frame(width: 300, alignment: .trailing)
+            }
+            .padding(10)
+            .padding(.leading, 5)
         }
         .buttonStyle(PlainButtonStyle())
-        .frame(width: CGFloat(320), height: CGFloat(230))
+        .frame(width: 330, height: 230)
         .background(Color.primary.colorInvert())
         .cornerRadius(10)
         .shadow(radius: 10)
@@ -83,9 +81,8 @@ struct NeedsRow: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
                         ForEach(shared.needArray(), id: \.ID) { currentDiscover in
-                            NeedView(need: currentDiscover).frame(width: CGFloat(320), height: CGFloat(230))
+                            NeedView(need: currentDiscover).frame(width: 330, height: 230)
                         }
-
                     }.padding(20)
                 }.offset(x: 0, y: -20)
             }

@@ -18,31 +18,21 @@ struct UserPreviewNeeder: View {
         }
     }
     
-    init(user: UserInfo, description descr: String, whiteText: Bool) {
-        self.user = user
-        self.descr = descr
-        self.whiteText = whiteText
-    }
-    
     init(user: UserInfo, whiteText: Bool) {
         self.user = user
         descr = ""
         self.whiteText = whiteText
-
     }
     
     var body: some View {
         HStack {
-//            Avatar(image: "\(user.photo)", size: 60)
             Avatar(image: user.profilePic)
-            VStack (alignment: .leading){
-                Text("\(user.name)\n\(user.surname)")
-                    .font(.title)
-                    .fontWeight(.regular)
-                    .foregroundColor(textColor)
-                    .offset(x: 0, y: -3)
-                    .lineLimit(2)
-            }.padding(.leading, 5)
+            Text("\(user.name)\n\(user.surname)")
+                .font(.title)
+                .fontWeight(.regular)
+                .foregroundColor(textColor)
+                .scaleEffect(0.9)
+                .lineLimit(2)
             Spacer()
         }
     }
