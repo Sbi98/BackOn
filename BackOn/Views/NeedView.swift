@@ -76,7 +76,7 @@ struct NeedsRow: View {
             }.buttonStyle(PlainButtonStyle())
 
             if shared.needArray().isEmpty{
-                Text("There are no commitments in your surroundings")
+                Text("You have no needs")
                     .font(.headline)
                     .padding(.horizontal, 50)
             } else {

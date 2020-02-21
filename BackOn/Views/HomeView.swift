@@ -38,26 +38,26 @@ struct HomeView: View {
 //                NeederButton()
                 Spacer()
                 
-                Button("Schedule Notification") {
-                    let nextCommitment = getNextNotificableCommitment(dataDictionary: self.shared.commitmentSet)
-                    if nextCommitment != nil {
-                        UNUserNotificationCenter.current().getNotificationSettings { settings in
-                            if settings.authorizationStatus == UNAuthorizationStatus.authorized {
-                                let notification = UNMutableNotificationContent()
-                                notification.title = nextCommitment!.title
-                                notification.subtitle = nextCommitment!.descr
-                                notification.sound = UNNotificationSound.default
-
-                                //              Imposto la notifica 2 min prima della scadenza
-                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: nextCommitment!.timeRemaining() - 2*60, repeats: false)
-                                // Le notifiche non vanno perché va aggiustato l'id del commitment
-                                let request = UNNotificationRequest(identifier: "\(nextCommitment!.ID)", content: notification, trigger: trigger)
-                                //              Aggiungo la richiesta di notifica al notification center (sembra una InvokeLater per le notifiche)
-                                UNUserNotificationCenter.current().add(request)
-                            }
-                        }
-                    }
-                }.padding()
+//                Button("Schedule Notification") {
+//                    let nextCommitment = getNextNotificableCommitment(dataDictionary: self.shared.commitmentSet)
+//                    if nextCommitment != nil {
+//                        UNUserNotificationCenter.current().getNotificationSettings { settings in
+//                            if settings.authorizationStatus == UNAuthorizationStatus.authorized {
+//                                let notification = UNMutableNotificationContent()
+//                                notification.title = nextCommitment!.title
+//                                notification.subtitle = nextCommitment!.descr
+//                                notification.sound = UNNotificationSound.default
+//
+//                                //              Imposto la notifica 2 min prima della scadenza
+//                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: nextCommitment!.timeRemaining() - 2*60, repeats: false)
+//                                // Le notifiche non vanno perché va aggiustato l'id del commitment
+//                                let request = UNNotificationRequest(identifier: "\(nextCommitment!.ID)", content: notification, trigger: trigger)
+//                                //              Aggiungo la richiesta di notifica al notification center (sembra una InvokeLater per le notifiche)
+//                                UNUserNotificationCenter.current().add(request)
+//                            }
+//                        }
+//                    }
+//                }.padding()
             }
         }
         .padding(.top, 40)

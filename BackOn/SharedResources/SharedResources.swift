@@ -16,10 +16,10 @@ class Shared: ObservableObject {
             if oldValue == false && loading == true {
                 LoadingPageView.show()
                 if helperMode{
-                    commitmentSet.removeAll(keepingCapacity: false)
-                    discoverSet.removeAll(keepingCapacity: false)
-                    (UIApplication.shared.delegate as! AppDelegate).dbController.loadMyCommitments()
+                    discoverSet = [:]
+                    commitmentSet = [:]
                     (UIApplication.shared.delegate as! AppDelegate).dbController.loadCommitByOther()
+                    (UIApplication.shared.delegate as! AppDelegate).dbController.loadMyCommitments()
                 }
                 else{
                     needSet.removeAll(keepingCapacity: false)

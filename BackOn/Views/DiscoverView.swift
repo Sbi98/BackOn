@@ -78,7 +78,7 @@ struct DiscoverRow: View {
             }.buttonStyle(PlainButtonStyle())
             
             if shared.discoverArray().isEmpty{
-                Text("There are no commitments in your surroundings").font(.headline)
+                Text("There are no needers in your surroundings").font(.headline)
                     .padding(.horizontal, 50)
             } else{
                 
